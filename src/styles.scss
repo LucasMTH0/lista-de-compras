@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --gray-700: #212121;
+  --green-500: #5CB338;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
 }

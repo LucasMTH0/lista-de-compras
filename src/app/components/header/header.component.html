@@ -1,10 +1,21 @@
 <header class="header-container">
-  <nav>
-    <li>Home</li>
-    <ul>
-      <li>Perfil</li>
-      <li>Login</li>
-      <li>Cadastro</li>
+  <nav class="navbar-container">
+    <a
+      routerLink="/"
+      class="navbar-link"
+    > Home </a>
+    <ul class="navbar-container">
+      @if (isUserLoggedIn){
+        <a class="navbar-link" routerLink="/profile"> Perfil </a>
+        <a
+          class="navbar-link"
+          routerLink="/profile"
+          (click)="handleLogout()"
+        > Sair </a>
+      } @else {
+        <a class="navbar-link" routerLink="/auth/login"> Login </a>
+        <a class="navbar-link" routerLink="/auth/register"> Cadastro </a>
+      }
     </ul>
   </nav>
 </header>

@@ -1,0 +1,50 @@
+<article class="container">
+  <form
+    [formGroup]="productForm"
+    (ngSubmit)="handleSubmitRegister()"
+    class="form-container"
+  >
+    <input
+      type="file"
+      placeholder="image"
+      accept="image/*"
+      (change)="selectProductImage($event)"
+    />
+    <input
+      formControlName="name"
+      placeholder="Nome"
+      class="form-input"
+    />
+
+    <select formControlName="category" class="form-input">
+      @for (category of CategoriesList; track category.id) {
+        <option [value]="category.name">{{ category.name }}</option>
+      }
+    </select>
+
+    <select
+      formControlName="priority" class="form-input"
+    >
+      @for (priority of PriorityList; track priority.id){
+        <option [value]="priority.name">{{ priority.name }}</option>
+      }
+    </select>
+
+    <input
+      formControlName="price"
+      placeholder="Preço"
+      class="form-input"
+    />
+    <input
+      formControlName="url"
+      placeholder="URL"
+      class="form-input"
+    />
+    <button
+      class="form-submit"
+      [disabled]="productForm.invalid"
+    >
+      Cadastrar
+    </button>
+  </form>
+</article>

@@ -1,0 +1,10 @@
+@if (product){
+  <div (click)="handleNavigateToDetails()">
+    <img [src]="product.image" alt="imagem do produto" />
+    <h1>{{ product.name }}</h1>
+    <h2>{{ product.price }}</h2>
+    <h2>
+      <a [href]="product.url">{{ product.url }}</a></h2>
+  </div>
+}
+

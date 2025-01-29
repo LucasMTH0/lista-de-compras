@@ -1,0 +1,60 @@
+<section class="container">
+  <form
+    class="form-container"
+    [formGroup]="variant === 'login' ? loginForm : registerForm"
+    (ngSubmit)="variant === 'login' ? submitLogin() : submitRegister"
+  >
+
+    <h1 class="form-title">
+      {{ variant === 'login' ? 'Entrar' : 'Cadastrar' }}
+    </h1>
+    <h2 class="form-subtitle">
+      {{ variant === 'login' ?
+        'Digite o E-mail e senha para se conectar.'
+        :
+        'Preencha os campos para realizar seu cadastro.'
+      }}
+    </h2>
+
+    @if (variant === 'register'){
+      <input
+        name="name"
+        type="text"
+        class="form-input"
+        placeholder="Nome"
+        formControlName="name"
+      />
+    }
+    <input
+      name="email"
+      type="email"
+      class="form-input"
+      placeholder="E-mail"
+      formControlName="email"
+    />
+    <input
+      name="password"
+      type="password"
+      class="form-input"
+      placeholder="Senha"
+      formControlName="password"
+    />
+    @if (variant === 'register'){
+      <input
+        name="repeatPassword"
+        type="password"
+        class="form-input"
+        placeholder="Repetir senha"
+        formControlName="repeatPassword"
+      />
+    }
+    <button
+      [disabled]="variant === 'login' ? loginForm.invalid : registerForm.invalid"
+      class="form-submit"
+    >
+      {{
+        variant === 'login' ? 'Entrar' : 'Cadastrar'
+      }}
+    </button>
+  </form>
+</section>

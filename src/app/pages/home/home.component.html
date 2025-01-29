@@ -1,1 +1,14 @@
 <h1>HELLO WORLD!</h1>
+<nav>
+  <button (click)="handleNavigateToRegisterNewProduct()">Adicionar novo produto a lista</button>
+</nav>
+
+  <div>
+    @if (products$) {
+      @for (product of products$ | async; track product.id){
+        <app-product-card [product]="product"></app-product-card>
+      }
+    } @else {
+      <h1>Nenhum produto adicionado.</h1>
+    }
+  </div>
