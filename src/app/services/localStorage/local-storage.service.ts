@@ -16,7 +16,6 @@ export class LocalStorageService {
   getUserIdStorage(): string{
     const userStringify: string = localStorage.getItem(environment.LOCALSTORAGE) as string;
     const user: User = JSON.parse(userStringify);
-    console.log("usuario: ")
     return user.id as string;
   }
 

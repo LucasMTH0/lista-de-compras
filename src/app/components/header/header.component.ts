@@ -6,14 +6,12 @@ import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, JsonPipe],
+  imports: [RouterLink],
   providers: [UserSignal],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  //userSignal = Inject(UserSignal)
-  // user = this.userSignal.getUser()
   isUserLoggedIn: Boolean = false;
   constructor(protected userSignal: UserSignal, protected  userService: UserService) {
 

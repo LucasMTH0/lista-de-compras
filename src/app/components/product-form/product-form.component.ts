@@ -1,4 +1,4 @@
-import {Component, DestroyRef, OnInit} from '@angular/core';
+import {Component, DestroyRef, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {PriorityList} from '../../util/priority-list';
 import {CategoriesList} from '../../util/categories-list';
@@ -9,6 +9,7 @@ import {UserService} from '../../services/user/user.service';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
 import {ApiResponse} from '../../interface/ApiResponse';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {Product} from '../../interface/Product';
 
 @Component({
   selector: 'app-product-form',
@@ -17,6 +18,9 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent implements OnInit {
+  @Input() variant: 'register' | 'update' = 'register'
+  @Input() product: Product | undefined | any;
+
   protected readonly PriorityList = PriorityList;
   protected readonly CategoriesList = CategoriesList;
 
@@ -34,6 +38,9 @@ export class ProductFormComponent implements OnInit {
       const userParsed = JSON.parse(user);
       this.productForm.controls['userId'].setValue(userParsed.id);
     }
+    if(this.variant === 'update'){
+      this.fillProductValue()
+    }
   }
 
   productForm = new FormGroup({
@@ -49,11 +56,29 @@ export class ProductFormComponent implements OnInit {
     createdAt: new FormControl(new Date()),
   })
 
+  fillProductValue(){
+    if(this.product){
+      this.productForm.patchValue(this.product)
+    }
+  }
+
   selectProductImage(image: any){
     const fileReader = new FileReader();
     fileReader.readAsDataURL(image.target.files[0]);
     fileReader.onload = () => {
       this.productForm.controls.image.setValue(fileReader.result as string);
+    }
+  }
+
+  handleUpdateProduct(){
+    if(this.product){
+      const productId =this.product['_id']
+      this.productService.update( productId, this.productForm.value as Product).subscribe(
+        (messageUpdateSucessful: ApiResponse) => {
+          this.toastrService.success(messageUpdateSucessful.message)
+          this.router.navigateByUrl('/')
+        }
+      )
     }
   }
 

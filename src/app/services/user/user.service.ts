@@ -27,6 +27,7 @@ export class UserService {
 
   logout(){
     this.localStorageService.deleteUserStorage()
+    this.userEmitter.next(null)
     this.router.navigateByUrl('/')
   }
 

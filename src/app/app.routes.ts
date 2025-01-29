@@ -9,18 +9,18 @@ import {UpdateProductComponent} from './pages/product/update-product/update-prod
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
     path: 'auth',
     children: [
       {
         path: 'login',
-        component: LoginComponent,
+        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
       },
       {
         path: 'register',
-        component: RegisterComponent,
+        loadComponent: () => import('./pages/auth/register/register.component').then(m => m.RegisterComponent)
       }
     ]
   },
@@ -29,15 +29,15 @@ export const routes: Routes = [
     children: [
       {
         path: 'new',
-        component: CreateProductComponent
+        loadComponent: () => import('./pages/product/create-product/create-product.component').then(m => m.CreateProductComponent)
       },
       {
         path: 'detail/:id',
-        component: DetailProductComponent
+        loadComponent: () => import('./pages/product/detail-product/detail-product.component').then(m => m.DetailProductComponent)
       },
       {
         path: 'edit/:id',
-        component: UpdateProductComponent
+        loadComponent: () => import('./pages/product/update-product/update-product.component').then(m => m.UpdateProductComponent)
       }
 
     ]

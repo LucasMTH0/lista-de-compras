@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductsService} from '../../services/products/products.service';
 import {Observable} from 'rxjs';
@@ -14,7 +14,8 @@ import {ProductCardComponent} from '../../components/product-card/product-card.c
     ProductCardComponent
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   protected products$: Observable<Product[]> | undefined;

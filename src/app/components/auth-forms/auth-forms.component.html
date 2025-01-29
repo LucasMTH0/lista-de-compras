@@ -2,7 +2,7 @@
   <form
     class="form-container"
     [formGroup]="variant === 'login' ? loginForm : registerForm"
-    (ngSubmit)="variant === 'login' ? submitLogin() : submitRegister"
+    (ngSubmit)="variant === 'login' ? submitLogin() : submitRegister()"
   >
 
     <h1 class="form-title">

@@ -1,1 +1,14 @@
-<p>detail-product works!</p>
+<!--@if (product$ | async as product) {-->
+<!--  <div >-->
+<!--    <img [src]="product.image"/>-->
+<!--  </div>-->
+<!--}-->
+<div *ngIf="product$ | async as product">
+    <div >
+      <button>Deletar</button>
+      <button (click)="handleEditProduct()">Editar</button>
+      <h1>{{ product.name }}</h1>
+      <img [src]="product.image"/>
+      <a [href]="product.url">{{ product.url }}</a>
+    </div>
+</div>

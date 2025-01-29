@@ -7,11 +7,10 @@
     <ul class="navbar-container">
       @if (isUserLoggedIn){
         <a class="navbar-link" routerLink="/profile"> Perfil </a>
-        <a
+        <p
           class="navbar-link"
-          routerLink="/profile"
           (click)="handleLogout()"
-        > Sair </a>
+        > Sair </p>
       } @else {
         <a class="navbar-link" routerLink="/auth/login"> Login </a>
         <a class="navbar-link" routerLink="/auth/register"> Cadastro </a>

@@ -14,10 +14,16 @@ export class ProductsService {
   create(product: any){
     return this.http.post(environment.API+'/products', product)
   }
-  list(id: string): Observable<Product[]>{
-    return this.http.get<Product[]>(environment.API+`/products/${id}`)
+  list(idUser: string): Observable<Product[]>{
+    return this.http.get<Product[]>(environment.API+`/products/${idUser}`)
   }
-  get(id: string){
-    return this.http.get(environment.API+`/products/${id}`)
+  get(idUser: string, idProduct: string){
+    return this.http.get<Product>(environment.API+`/products/${idUser}/${idProduct}`)
+  }
+  update( idProduct: string, product: Product){
+    return this.http.put(environment.API+`/products/${idProduct}`, product)
+  }
+  delete(idProduct: string){
+    return this.http.delete(environment.API+`/products/${idProduct}`)
   }
 }
