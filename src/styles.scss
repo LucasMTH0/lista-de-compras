@@ -1,7 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 :root {
-  --gray-700: #212121;
-  --green-500: #5CB338;
+  
+  --gray-50: #f6f6f6;
+  --gray-100: #e7e7e7;
+  --gray-200: #d1d1d1;
+  --gray-300: #b0b0b0;
+  --gray-400: #888888;
+  --gray-500: #6d6d6d;
+  --gray-600: #5d5d5d;
+  --gray-700: #4f4f4f;
+  --gray-800: #454545;
+  --gray-900: #3d3d3d;
+  --gray-950: #212121;
+
+  --green-50: #f0faeb;
+  --green-100: #dff3d4;
+  --green-200: #c1e9ad;
+  --green-300: #9ad97d;
+  --green-400: #77c754;
+  --green-500: #5cb338;
+  --green-600: #418927;
+  --green-700: #346922;
+  --green-800: #2d5420;
+  --green-900: #28481f;
+  --green-950: #12270c;
+
+  --red-50: #fef2f2;
+  --red-100: #ffe1e1;
+  --red-200: #ffc8c8;
+  --red-300: #ffa2a2;
+  --red-400: #fd6c6c;
+  --red-500: #f53e3e;
+  --red-600: #e53030;
+  --red-700: #bf1616;
+  --red-800: #9e1616;
+  --red-900: #831919;
+  --red-950: #470808;
+
+  --blue-50: #eef7ff;
+  --blue-100: #daedff;
+  --blue-200: #bde1ff;
+  --blue-300: #90ceff;
+  --blue-400: #5ab2ff;
+  --blue-500: #3592fc;
+  --blue-600: #1f73f1;
+  --blue-700: #175cde;
+  --blue-800: #194bb4;
+  --blue-900: #1a428e;
+  --blue-950: #152a56;
+  --gradient-gray: linear-gradient(to right, #D3CCE3, #E9E4F0);
+  --dark-rgba: rgba(33,33,33,0.3); 
+  @include mat.button-overrides((
+    filled-container-color: #212121,
+    filled-label-text-color: #212121,
+  ));
 }
 
 * {
@@ -16,3 +69,6 @@ body {
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
 }
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

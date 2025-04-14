@@ -5,11 +5,13 @@ import {RegisterComponent} from './pages/auth/register/register.component';
 import {CreateProductComponent} from './pages/product/create-product/create-product.component';
 import {DetailProductComponent} from './pages/product/detail-product/detail-product.component';
 import {UpdateProductComponent} from './pages/product/update-product/update-product.component';
+import { authenticationGuard } from './guards/authentication/authentication.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+    canActivate: [authenticationGuard]
   },
   {
     path: 'auth',

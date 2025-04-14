@@ -1,23 +1,23 @@
-import {Component, Inject, Input} from '@angular/core';
-import { Product} from '../../interface/Product';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {Product} from '../../interface/Product';
 import {Router} from '@angular/router';
-import {LocalStorageService} from '../../services/localStorage/local-storage.service';
+import {cutString} from '../../util/cut-string';
+import {CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss'
+  styleUrl: './product-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCardComponent {
+  protected readonly cutString = cutString;
   @Input() product: Product | undefined | any;
-
-  constructor(private router: Router) {
-  }
+  router = inject(Router)
 
   handleNavigateToDetails(){
-    if(this.product){
-      this.router.navigateByUrl(`/products/detail/${this.product['_id']}`);
-    }
+    this.router.navigateByUrl(`/products/detail/${this.product['_id']}`);
   }
+
 }

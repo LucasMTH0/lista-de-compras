@@ -1,4 +1,4 @@
-import {Component, DestroyRef, Input, OnInit, Output} from '@angular/core';
+import {Component, DestroyRef, inject, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {PriorityList} from '../../util/priority-list';
 import {CategoriesList} from '../../util/categories-list';
@@ -10,16 +10,24 @@ import {LocalStorageService} from '../../services/localStorage/local-storage.ser
 import {ApiResponse} from '../../interface/ApiResponse';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {Product} from '../../interface/Product';
-
+import {NgxCurrencyDirective} from 'ngx-currency';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-product-form',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule, 
+    NgxCurrencyDirective, 
+    MatFormFieldModule, 
+    MatInputModule
+  ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent implements OnInit {
   @Input() variant: 'register' | 'update' = 'register'
   @Input() product: Product | undefined | any;
+  userService = inject(UserService);
 
   protected readonly PriorityList = PriorityList;
   protected readonly CategoriesList = CategoriesList;
@@ -33,10 +41,9 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user: any = this.localStorage.getUserStorage();
+    const user: any = this.userService.user();
     if(user){
-      const userParsed = JSON.parse(user);
-      this.productForm.controls['userId'].setValue(userParsed.id);
+      this.productForm.controls['userId'].setValue(user.id);
     }
     if(this.variant === 'update'){
       this.fillProductValue()
@@ -66,16 +73,19 @@ export class ProductFormComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(image.target.files[0]);
     fileReader.onload = () => {
+      console.log(fileReader.result)
       this.productForm.controls.image.setValue(fileReader.result as string);
     }
   }
 
   handleUpdateProduct(){
     if(this.product){
-      const productId =this.product['_id']
-      this.productService.update( productId, this.productForm.value as Product).subscribe(
-        (messageUpdateSucessful: ApiResponse) => {
-          this.toastrService.success(messageUpdateSucessful.message)
+      const productId = this.product['_id']
+      this.productService.update( productId, this.productForm.value as Product)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        ({message}: any) => {
+          this.toastrService.success(message)
           this.router.navigateByUrl('/')
         }
       )

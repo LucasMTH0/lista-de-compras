@@ -1,10 +1,11 @@
 @if (product){
-  <div (click)="handleNavigateToDetails()">
-    <img [src]="product.image" alt="imagem do produto" />
-    <h1>{{ product.name }}</h1>
-    <h2>{{ product.price }}</h2>
-    <h2>
-      <a [href]="product.url">{{ product.url }}</a></h2>
+  <div class="card-container" (click)="handleNavigateToDetails()">
+    <img class="card-image" [src]="product.image" alt="imagem do produto"/>
+    <div class="card-column">
+      <h2 class="card-price"> {{ product.price | currency:'BRL' }}</h2>
+      <h1 class="card-title">{{ cutString(product.name, 45) }}</h1>
+      <i class="card-category">{{ product.category }}</i>
+    </div>
   </div>
 }
 

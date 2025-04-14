@@ -1,19 +1,27 @@
 <header class="header-container">
   <nav class="navbar-container">
-    <a
-      routerLink="/"
-      class="navbar-link"
-    > Home </a>
+
+    <a routerLink="/" id="button-home">
+      <img src="assets/image/logo.png" style="width: 50px; height: 50px;" alt="logo" />
+    </a>
+
     <ul class="navbar-container">
-      @if (isUserLoggedIn){
-        <a class="navbar-link" routerLink="/profile"> Perfil </a>
-        <p
-          class="navbar-link"
-          (click)="handleLogout()"
-        > Sair </p>
+      @if (userService.user() !== null){
+        <!-- <span 
+          (click)="handleLogout()" id="button-logout" class="material-icons">logout
+        </span> -->
+        <a 
+        (click)="handleLogout()" id="button-logout" >Sair
+      </a>
       } @else {
-        <a class="navbar-link" routerLink="/auth/login"> Login </a>
-        <a class="navbar-link" routerLink="/auth/register"> Cadastro </a>
+        <a routerLink="/auth/login" id="button-login"> 
+          <!-- <span class="material-icons">person</span>  -->
+           Login
+        </a>
+        <a  routerLink="/auth/register" id="button-register"> 
+          <!-- <span class="material-icons">person_add</span> -->
+           Cadastro
+        </a>
       }
     </ul>
   </nav>

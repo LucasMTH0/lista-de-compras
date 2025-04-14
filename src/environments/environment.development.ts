@@ -1,4 +1,4 @@
 export const environment = {
-  API: 'http://localhost:8787',
+  API: 'https://lista-de-compras-api-roan.vercel.app',
   LOCALSTORAGE: 'listaDeCompras@user'
 };

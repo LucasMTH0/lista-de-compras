@@ -1,0 +1,9 @@
+.container {
+    width: 100%;
+    min-height: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-700);
+    border-radius: 4px;
+}

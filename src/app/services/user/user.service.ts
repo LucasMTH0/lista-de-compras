@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, signal} from '@angular/core';
 import {User} from '../../interface/User';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  userEmitter = new EventEmitter<User | null>();
+  user = signal<User | null>(null)
 
   constructor(
     private http: HttpClient,
@@ -18,7 +18,7 @@ export class UserService {
   ) { }
 
   setUser(user: User){
-    this.userEmitter.next(user)
+    this.user.set(user)
   }
 
   login(user: User){
@@ -27,8 +27,8 @@ export class UserService {
 
   logout(){
     this.localStorageService.deleteUserStorage()
-    this.userEmitter.next(null)
-    this.router.navigateByUrl('/')
+    this.user.set(null)
+    this.router.navigateByUrl('/auth/login')
   }
 
   register(user: User){

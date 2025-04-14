@@ -7,12 +7,14 @@ import {Product} from '../../../interface/Product';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {ApiResponse} from '../../../interface/ApiResponse';
 import {ToastrService} from 'ngx-toastr';
-
+import {MatButtonModule} from '@angular/material/button';
+import {convertNumberToCurrencyBRL} from '../../../util/convert-number-to-currency-BRL';
 @Component({
   selector: 'app-detail-product',
   imports: [
     AsyncPipe,
-    CommonModule
+    CommonModule,
+    MatButtonModule
   ],
   templateUrl: './detail-product.component.html',
   styleUrl: './detail-product.component.scss'
@@ -34,7 +36,7 @@ export class DetailProductComponent {
   }
 
   getProduct(){
-    this.product$ = this.productService.get(this.idUser, this.idProduct)
+    this.product$ = this.productService.get(this.idProduct)
   }
 
   handleDeleteProduct(){
@@ -44,7 +46,13 @@ export class DetailProductComponent {
     })
   }
 
+  handleNavigateToShopUrl(url: string){
+    window.open(url, '_blank');
+  }
+
   handleEditProduct(){
     this.router.navigateByUrl(`/products/edit/${this.idProduct}`);
   }
+
+  protected readonly convertNumberToCurrencyBRL = convertNumberToCurrencyBRL;
 }

@@ -1,0 +1,16 @@
+<form
+  [formGroup]="listForm"
+  (ngSubmit)="variant == 'register' ? handleRegisterList() : handleUpdateList()"
+>
+  <input
+    placeholder="Nome"
+    formControlName="name"
+  />
+  <input
+    placeholder="Descrição"
+    formControlName="description"
+  />
+  <button>
+    {{ variant === 'register' ? 'Cadastrar' : 'Editar' }}
+  </button>
+</form>

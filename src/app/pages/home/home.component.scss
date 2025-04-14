@@ -1,0 +1,35 @@
+.products-group-container{
+  max-width: 900px;
+  width: 100%;
+  margin: 2rem auto;
+  border-radius: 15px;
+flex-wrap: wrap;
+  display: flex;
+  gap: 0.9rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .products-group-container{
+    max-width: none;
+    width: 100%;
+  } 
+}
+
+
+.container-empty{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.title-empty-product-list{
+  text-align: center;
+}
+
+
+
+.icon {
+  font-size: 45px;
+}

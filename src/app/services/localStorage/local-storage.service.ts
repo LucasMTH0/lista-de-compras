@@ -13,10 +13,16 @@ export class LocalStorageService {
     return localStorage.getItem(environment.LOCALSTORAGE);
   }
 
+  getTokenStorage(){
+    const userStorage: string =  localStorage.getItem(environment.LOCALSTORAGE) as string;
+    const user: User = JSON.parse(userStorage);
+    return user ? user.token as string : '';
+  }
+
   getUserIdStorage(): string{
     const userStringify: string = localStorage.getItem(environment.LOCALSTORAGE) as string;
     const user: User = JSON.parse(userStringify);
-    return user.id as string;
+    return user.id as string && '';
   }
 
   checkUserIsLoggedIn(): boolean{

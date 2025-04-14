@@ -1,14 +1,20 @@
-<!--@if (product$ | async as product) {-->
-<!--  <div >-->
-<!--    <img [src]="product.image"/>-->
-<!--  </div>-->
-<!--}-->
-<div *ngIf="product$ | async as product">
-    <div >
-      <button>Deletar</button>
-      <button (click)="handleEditProduct()">Editar</button>
-      <h1>{{ product.name }}</h1>
-      <img [src]="product.image"/>
-      <a [href]="product.url">{{ product.url }}</a>
+<div *ngIf="product$ | async as product" class="container">
+  
+  <div class="horizontal-wrapper mt">
+    <img [src]="product.image" class="product-image"/>
+
+    <div class="vertical-wrapper">
+
+      <h1 class="product-title">{{ product.name }}</h1>
+      <i>{{ product.category }}</i>
+      <p><b>Prioridade:</b> {{ product.priority }}</p>
+      <h2 class="product-price">{{ convertNumberToCurrencyBRL(product.price) }}</h2>
+
+      <div class="horizontal-wrapper">
+        <button class="button" (click)="handleNavigateToShopUrl(product.url)">Comprar</button>
+        <button class="button" (click)="handleDeleteProduct()">Remover</button>
+        <button class="button" (click)="handleEditProduct()">Editar</button>
+      </div>
     </div>
+  </div>
 </div>

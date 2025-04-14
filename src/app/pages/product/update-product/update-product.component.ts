@@ -32,7 +32,7 @@ export class UpdateProductComponent {
     this.getProduct();
   }
   getProduct(){
-    this.productService.get(this.idUser, this.idProduct)
+    this.productService.get(this.idProduct)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((product: Product) => {
         console.log(product);

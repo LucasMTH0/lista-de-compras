@@ -1,0 +1,16 @@
+{
+  "name": "lista-de-compras",
+  "short_name": "lista-de-compras",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/image/logo.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    }
+  ]
+}

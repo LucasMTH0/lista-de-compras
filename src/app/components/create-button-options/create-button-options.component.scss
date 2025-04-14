@@ -1,0 +1,35 @@
+.container-option-buttons{
+    position: fixed;
+    bottom: 20px;
+    right: 3px;
+    display: flex;
+    flex-direction: column;
+}
+.button-add-product {
+    background: var(--green-500);
+    &:hover{
+      border: 2px solid var(--green-700);
+    }
+}
+  
+.button-add-list {
+    background: var(--gray-700);
+    &:hover {
+      border: 2px solid var(--gray-900);
+    }
+}
+  
+.button{
+    border: none;
+    width: 80px;
+    height: 80px;
+    color: white;
+    font-weight: bold;
+    border-radius: 500px;
+    cursor: pointer;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

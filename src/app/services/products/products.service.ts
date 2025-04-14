@@ -1,27 +1,44 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Product} from '../../interface/Product';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
 
-  constructor(private http: HttpClient) { }
+
+export class ProductsService {
+  private http = inject(HttpClient)
+  public apiService = inject(ApiService)
+
+  private readonly products$ = this.http.get<Product[]>(environment.API+`/products`,
+    {headers: this.apiService.generateHeaders()}
+  )
+
+  public products = toSignal(this.products$)
+
+  list(){
+    return this.http.get<Product[]>(environment.API+`/products`,
+      {headers: this.apiService.generateHeaders()}
+    )
+  }
 
   create(product: any){
     return this.http.post(environment.API+'/products', product)
   }
-  list(idUser: string): Observable<Product[]>{
-    return this.http.get<Product[]>(environment.API+`/products/${idUser}`)
+
+  get(idProduct: string){
+    return this.http.get<Product>(environment.API+`/products/${idProduct}`,
+      {headers: this.apiService.generateHeaders()}
+    )
   }
-  get(idUser: string, idProduct: string){
-    return this.http.get<Product>(environment.API+`/products/${idUser}/${idProduct}`)
-  }
+
   update( idProduct: string, product: Product){
-    return this.http.put(environment.API+`/products/${idProduct}`, product)
+    return this.http.put<Product>(environment.API+`/products/${idProduct}`, product)
   }
   delete(idProduct: string){
     return this.http.delete(environment.API+`/products/${idProduct}`)
