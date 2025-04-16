@@ -6,6 +6,7 @@ import {ProductCardComponent} from '../../components/product-card/product-card.c
 import {ListService} from '../../services/list/list.service';
 import { CreateButtonOptionsComponent } from '../../components/create-button-options/create-button-options.component';
 import { CategoriesList } from '../../util/categories-list';
+import { LoadingService } from '../../services/loading/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,19 @@ import { CategoriesList } from '../../util/categories-list';
 export class HomeComponent {
   private router = inject(Router);
   private listService = inject(ListService);
+  private loadingService = inject(LoadingService);
   public productsService = inject(ProductsService);
   protected readonly CategoriesList = CategoriesList;
   
   public list$ = this.listService.list();
   public products$ = this.productsService.list();
-
-  
-
+  constructor() {
+    this.loadingService.setLoading(true)
+    // this.list$.subscribe({
+    //   next: () => this.loadingService.setLoading(false),
+    //   error: () => this.loadingService.setLoading(false)
+    // });
+  }
 
   handleNavigateToRegisterPage(route: string){
     this.router.navigateByUrl(route)

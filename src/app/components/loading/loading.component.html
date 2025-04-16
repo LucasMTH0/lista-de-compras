@@ -1,7 +1,7 @@
-@if(loadingService.getLoading()){
+@if(loadingService.getLoading() === true){
     <div class="container">
         <h1 class="loading-title">Carregando...</h1>
-        <mat-spinner class="spinner"></mat-spinner>
+        <mat-spinner class="spinner" color="accent"></mat-spinner>
     </div>
 }
 
